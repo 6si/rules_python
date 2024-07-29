@@ -186,6 +186,8 @@ def main() -> None:
 
         env = os.environ.copy()
         env.update(deserialized_args["environment"])
+        # https://6sense.atlassian.net/browse/PS-11296
+        env.update({"PIP_CONSTRAINT": "/tmp/pip_constraint.txt"})
         # Assumes any errors are logged by pip so do nothing. This command will fail if pip fails
         subprocess.run(pip_args, check=True, env=env)
     finally:
